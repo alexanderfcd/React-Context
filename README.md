@@ -11,7 +11,7 @@ npm i react-usectx --save
 ## Add it to your project
 
 ```js
-import ususeCtx from "react-usectx";
+import useCtx from "react-usectx";
 ```
 
 ## Usage

@@ -1,9 +1,11 @@
 {
   "name": "react-usectx",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "npx tsc index.ts --target es2017"
   },
   "author": "https://jsf7.dev",
   "license": "MIT",
@@ -12,10 +14,14 @@
     "react": "^19.1.0"
   },
   "devDependencies": {
+    "@babel/parser": "^7.28.0",
     "@babel/preset-env": "^7.28.0",
     "@babel/preset-typescript": "^7.27.1",
     "@types/react": "^19.1.8",
     "jest": "^30.0.4",
-    "typescript": "^5.8.3"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "undici": "^7.11.0",
+    "undici-types": "^7.11.0"
   }
 }
