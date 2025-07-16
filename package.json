@@ -1,0 +1,21 @@
+{
+  "name": "usectx",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "https://jsf7.dev",
+  "license": "MIT",
+  "description": "Custom React globally accessible context hook",
+  "dependencies": {
+    "react": "^19.1.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-typescript": "^7.27.1",
+    "@types/react": "^19.1.8",
+    "jest": "^30.0.4",
+    "typescript": "^5.8.3"
+  }
+}
