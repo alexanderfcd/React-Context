@@ -1,8 +1,16 @@
 {
   "name": "react-usectx",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "index.js",
   "type": "module",
+   "keywords": [
+    "react",
+    "context",
+    "state",
+    "useCtx",
+    "getCtx",
+    "updateCtx"
+  ],
   "scripts": {
     "test": "jest",
     "build": "npx tsc index.ts --target es2017"
