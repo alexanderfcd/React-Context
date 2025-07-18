@@ -1,12 +1,11 @@
 {
   "name": "react-usectx",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "index.js",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/npm/cli.git",
-    "directory": "alexanderfcd/React-Context.git"
+    "url": "git+https://github.com/alexanderfcd/React-Context.git"
   },
    "keywords": [
     "react",
@@ -20,7 +19,8 @@
     "test": "jest",
     "build": "npx tsc index.ts --target es2017"
   },
-  "author": "https://jsf7.dev",
+  "author": "",
+  "homepage": "https://jsf7.dev/react-usectx",
   "license": "MIT",
   "description": "Custom React globally accessible context hook",
   "dependencies": {
