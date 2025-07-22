@@ -1,3 +1,2 @@
-export { useCtx as default } from "./src/context";
-export { getCtx } from "./src/context";
-export { updateCtx } from "./src/context";
+export { useCtx as default } from "./context";
+export { getCtx, useReducer, updateCtx } from "./context";
