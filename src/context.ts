@@ -41,7 +41,7 @@ const reducerCache: { [key: string]: WeakMap<any, any> } = {};
 export function useReducer<Snapshot>(
   name: string,
   modiFier: (data: any) => Snapshot,
-  useCache: boolean = true
+  useCache: boolean = false
 ): Snapshot {
   if (!reducerCache[name]) {
     reducerCache[name] = new WeakMap();
