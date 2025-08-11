@@ -2,20 +2,28 @@
 
 import { ReactNode, useSyncExternalStore } from "react";
 import { CreateContext } from "./create-context";
+import { state } from "./types";
 
 type cache = { [key: string]: InstanceType<typeof CreateContext> };
 
 const cache: cache = {};
 
-const getInstance = (name: string): InstanceType<typeof CreateContext> => {
+const getInstance = (
+  name: string,
+  initialState?: state
+): InstanceType<typeof CreateContext> => {
   if (!cache[name]) {
-    cache[name] = new CreateContext();
+    cache[name] = new CreateContext(initialState);
+  } else {
+    if (typeof initialState !== "undefined") {
+      cache[name].commit(initialState);
+    }
   }
   return cache[name];
 };
 
-export function updateCtx(name: string): Function {
-  const ctx = getInstance(name);
+export function updateCtx(name: string, initialState?: state): Function {
+  const ctx = getInstance(name, initialState);
   return ctx.commit.bind(ctx);
 }
 
@@ -32,8 +40,11 @@ export function getCtx<Snapshot>(name: string): Snapshot {
   );
 }
 
-export function useCtx(name: string): [ReactNode, Function] {
-  return [getCtx(name), updateCtx(name)];
+export function useCtx(
+  name: string,
+  initialState?: state
+): [ReactNode, Function] {
+  return [getCtx(name), updateCtx(name, initialState)];
 }
 
 const reducerCache: { [key: string]: WeakMap<any, any> } = {};

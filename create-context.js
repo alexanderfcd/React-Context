@@ -1,4 +1,9 @@
 export class CreateContext {
+    constructor(initialState) {
+        if (initialState !== undefined) {
+            this.setState(initialState);
+        }
+    }
     #eventHandlers = [];
     #state = null;
     subscribe(handler) {

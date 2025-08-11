@@ -71,6 +71,14 @@ When any of the provided functions—useCtx, updateCtx, or getCtx—are invoked,
 
 This mechanism enables global state sharing across components. For example, calling getCtx("example-1") in one component will return the same state reference when called with "example-1" in any other component within the same document. This allows for seamless state synchronization across different parts of your application without the need for explicit context providers.
 
+### initialState
+
+```js
+useCtx(myContextID, { name: "John" });
+```
+
+The value you want the state to be initially. It can be a value of any type.
+
 ## Example
 
 ```js

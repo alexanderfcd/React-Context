@@ -1,14 +1,12 @@
-type eventHandlers = Array<Function>;
-
-type state =
-  | { [key: string]: any }
-  | Array<any>
-  | string
-  | number
-  | boolean
-  | null;
+import { eventHandlers, state } from "./types";
 
 export class CreateContext {
+  constructor(initialState?: state) {
+    if (initialState !== undefined) {
+      this.setState(initialState);
+    }
+  }
+
   #eventHandlers: eventHandlers = [];
 
   #state: state = null;
