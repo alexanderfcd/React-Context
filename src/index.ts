@@ -1,2 +1,2 @@
-export { useCtx as default } from "./context";
-export { getCtx, useReducer, updateCtx } from "./context";
+export { useCtx as default, useCtx as useGlobalState } from "./context";
+export { getCtx, useReducer, updateCtx, getCtx as getGlobalState, useReducer as useGlobalReducer, updateCtx as updateGlobalState } from "./context";
