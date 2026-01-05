@@ -1,13 +1,13 @@
 {
   "name": "react-usectx",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "main": "index.js",
   "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alexanderfcd/React-Context.git"
   },
-   "keywords": [
+  "keywords": [
     "react",
     "context",
     "state",

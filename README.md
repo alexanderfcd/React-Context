@@ -11,46 +11,46 @@ npm i react-usectx --save
 ## Add it to your project
 
 ```js
-import useCtx from "react-usectx";
+import {useGlobalState} from "react-usectx";
 ```
 
 ## Usage
 
 ```js
 // get both current state and set function
-const [myContext, setMyContext] = useCtx("stateName");
+const [myState, setMyState] = useGlobalState("stateName");
 ```
 
 ## Other methods:
 
-### getCtx
+### getGlobalState
 
 ```js
 // get current state only
 
-import { getCtx } from "react-usectx";
+import { getGlobalState } from "react-usectx";
 
-const myContext = getCtx("stateName");
+const myState = getGlobalState("stateName");
 ```
 
-### updateCtx
+### updateGlobalState
 
 ```js
 // set function  only
 
-import { updateCtx } from "react-usectx";
+import { updateGlobalState } from "react-usectx";
 
-const setMyContext = updateCtx("stateName");
+const setMyState = updateGlobalState("stateName");
 
-setMyContext({ name: "Rick Ross" });
+setMyState({ name: "Rick Ross" });
 ```
 
-### useReducer
+### useGlobalReducer
 
 ```js
-import { useReducer } from "react-usectx";
+import { useGlobalReducer } from "react-usectx";
 
-const fullName = useReducer("stateName", (data) => {
+const fullName = useGlobalReducer("stateName", (data) => {
   return `${data.firstName} ${data.lastName}`;
 });
 ```
@@ -62,19 +62,19 @@ const fullName = useReducer("stateName", (data) => {
 ```js
 const myContextID = "MyUniqueIdentifier";
 
-useCtx(myContextID);
+useGlobalState(myContextID);
 ```
 
 The stateName serves as a unique identifier for a shared state object. Internally, the state manager maintains a list of state entries, each associated with a distinct stateName.
 
-When any of the provided functions—useCtx, updateCtx, or getCtx—are invoked, the state manager checks whether a state object with the specified stateName already exists. If it does not, a new state entry is automatically created and initialized.
+When any of the provided functions—useGlobalState, updateGlobalState, or getGlobalState—are invoked, the state manager checks whether a state object with the specified stateName already exists. If it does not, a new state entry is automatically created and initialized.
 
-This mechanism enables global state sharing across components. For example, calling getCtx("example-1") in one component will return the same state reference when called with "example-1" in any other component within the same document. This allows for seamless state synchronization across different parts of your application without the need for explicit context providers.
+This mechanism enables global state sharing across components. For example, calling getGlobalState("example-1") in one component will return the same state reference when called with "example-1" in any other component within the same document. This allows for seamless state synchronization across different parts of your application without the need for explicit context providers.
 
 ### initialState
 
 ```js
-useCtx(myContextID, { name: "John" });
+useGlobalState(myContextID, { name: "John" });
 ```
 
 The value you want the state to be initially. It can be a value of any type.
@@ -83,7 +83,7 @@ The value you want the state to be initially. It can be a value of any type.
 
 ```js
 function Page() {
-  const [title, setTitle] = useCtx("title");
+  const [title, setTitle] = useGlobalState("title");
 
   return (
     <div className="wrapper">
@@ -116,7 +116,7 @@ function Title() {
 
 ```js
 function Page() {
-  const [title, setTitle] = useCtx("title");
+  const [title, setTitle] = useGlobalState("title");
 
   return (
     <div className="wrapper">
@@ -135,7 +135,7 @@ function Page() {
 }
 
 function Title() {
-  const reducedTitle: string = useReducer(
+  const reducedTitle: string = useGlobalReducer(
     "title",
     (title) => `Title is: ${title.toUpperCase()}`
   );
