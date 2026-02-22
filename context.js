@@ -51,3 +51,6 @@ export function useReducer(name, modiFier, useCache = false) {
     };
     return useSyncExternalStore(subscription, getState, getState);
 }
+export function stateApi(name) {
+    return getInstance(name);
+}

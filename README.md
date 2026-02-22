@@ -79,6 +79,79 @@ useGlobalState(myContextID, { name: "John" });
 
 The value you want the state to be initially. It can be a value of any type.
 
+
+### API Methods
+
+```js
+const api = stateApi(myContextID);
+```
+
+Manualy control the flow of the data.
+
+
+### subscribe 
+
+```js
+api.subscribe(data => {
+  console.log(data)
+});
+```
+
+Subscribe for changes
+
+
+### unsubscribe 
+
+```js
+const subscription = data => {
+  console.log(data)
+}
+api.unsubscribe(subscription);
+```
+
+unsubscribe from specific subscription
+
+
+### commit 
+
+```js
+api.commit({
+  my: "data"
+});
+```
+
+Sets data, and triggers all subscription and react hooks.
+
+
+### setState 
+
+```js
+api.setState({
+  my: "data"
+});
+```
+
+Sets data 'silently', without triggering anything.
+
+
+### undo 
+
+```js
+api.undo();
+```
+
+Sets state to previous (if any), and triggers all subscription and react hooks.
+
+### redo 
+
+```js
+api.redo();
+```
+
+Sets data to next state if undo was called previously, and triggers all subscription and react hooks.
+
+
+
 ## Example
 
 ```js
@@ -102,7 +175,7 @@ function Page() {
 }
 
 function Title() {
-  const title: string = getContext("title");
+  const title: string = getGlobalState("title");
   return (
     <h1>
       Component: <br />

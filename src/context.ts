@@ -75,3 +75,7 @@ export function useReducer<Snapshot>(
   };
   return useSyncExternalStore(subscription, getState, getState);
 }
+
+export function stateApi(name: string): InstanceType<typeof CreateContext> {
+  return getInstance(name)
+} 
