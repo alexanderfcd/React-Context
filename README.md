@@ -120,7 +120,7 @@ api.commit({
 });
 ```
 
-Sets data, and triggers all subscription and react hooks.
+Sets data, and triggers all subscriptions and react hooks.
 
 
 ### setState 
@@ -140,7 +140,7 @@ Sets data 'silently', without triggering anything.
 api.undo();
 ```
 
-Sets state to previous (if any), and triggers all subscription and react hooks.
+Sets state to previous (if any), and triggers all subscriptions and react hooks.
 
 ### redo 
 
@@ -148,7 +148,7 @@ Sets state to previous (if any), and triggers all subscription and react hooks.
 api.redo();
 ```
 
-Sets data to next state if undo was called previously, and triggers all subscription and react hooks.
+Sets data to next state if undo was called previously, and triggers all subscriptions and react hooks.
 
 
 

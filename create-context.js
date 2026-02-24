@@ -1,7 +1,7 @@
 export class CreateContext {
     constructor(initialState, options = {}) {
         const defaults = {
-            historySize: 99
+            historySize: 999
         };
         this.settings = Object.assign({}, defaults, options);
         if (initialState !== undefined) {
@@ -13,6 +13,7 @@ export class CreateContext {
     #state = null;
     #history = [];
     #activeVersion = -1;
+    #needsReset = false;
     subscribe(handler) {
         this.#eventHandlers.push(handler);
     }
@@ -24,26 +25,32 @@ export class CreateContext {
     }
     commit(state) {
         this.setState(state);
-        this.#eventHandlers.forEach((callback) => callback.call(undefined, state));
+        this.#trigger();
+    }
+    #trigger() {
+        this.#eventHandlers.forEach((callback) => callback.call(undefined, this.getState()));
     }
     undo() {
         const prev = this.#history[this.#activeVersion - 1];
         if (prev) {
             this.setState(prev, this.#history.indexOf(prev));
+            this.#needsReset = true;
+            this.#trigger();
         }
     }
     redo() {
         const next = this.#history[this.#activeVersion + 1];
         if (next) {
             this.setState(next, this.#history.indexOf(next));
+            this.#needsReset = true;
+            this.#trigger();
         }
     }
     setState(state, _av) {
         if (typeof _av === 'undefined') {
-            if ((this.#history.length - 1) > this.#activeVersion) {
+            if ((this.#history.length - 1) > this.#activeVersion && this.#needsReset) {
                 this.#history.splice(this.#activeVersion + 1, this.#history.length);
             }
-            this.#activeVersion = this.#history.length - 1;
         }
         this.#history.push(state);
         if (this.#history.length > this.settings.historySize) {
@@ -51,6 +58,9 @@ export class CreateContext {
         }
         if (typeof _av === 'number') {
             this.#activeVersion = _av;
+        }
+        else {
+            this.#activeVersion = this.#history.length - 1;
         }
         this.#state = state;
     }

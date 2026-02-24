@@ -14,10 +14,6 @@ const getInstance = (
 ): InstanceType<typeof CreateContext> => {
   if (!cache[name]) {
     cache[name] = new CreateContext(initialState);
-  } else {
-    if (typeof initialState !== "undefined") {
-      cache[name].commit(initialState);
-    }
   }
   return cache[name];
 };
@@ -44,7 +40,8 @@ export function useCtx(
   name: string,
   initialState?: state
 ): [ReactNode, Function] {
-  return [getCtx(name), updateCtx(name, initialState)];
+  const initializeFirst = updateCtx(name, initialState)
+  return [getCtx(name), initializeFirst];
 }
 
 const reducerCache: { [key: string]: WeakMap<any, any> } = {};
