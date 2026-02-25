@@ -42,7 +42,7 @@ export function useCtx(
 ): [ReactNode, Function, Function, Function, CreateContext] {
   const initializeFirst = updateCtx(name, initialState);
   const api = getInstance(name);
-  return [getCtx(name), initializeFirst, api.undo, api.redo, api];
+  return [getCtx(name), initializeFirst, api.undo.bind(api), api.redo.bind(api), api];
 }
 
 const reducerCache: { [key: string]: WeakMap<any, any> } = {};

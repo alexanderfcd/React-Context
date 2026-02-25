@@ -49,7 +49,7 @@ export class CreateContext {
   undo() {
       const prev = this.#history[this.#activeVersion - 1];
       if (prev) {
-          this.setState(prev, this.#history.indexOf(prev));
+          this.setState(prev, this.#history.indexOf(prev), true);
           this.#needsReset = true;
           this.#trigger()
       }
@@ -64,7 +64,7 @@ export class CreateContext {
       const nextIndex = this.#activeVersion + 1;
       const next = this.#history[nextIndex];
       if (next) {
-          this.setState(next, nextIndex);
+          this.setState(next, nextIndex, true);
           this.#needsReset = true;
           this.#trigger()
       } 
@@ -74,13 +74,15 @@ export class CreateContext {
     return !!this.#history[this.#activeVersion + 1]
   }
 
-  setState(state: state, _av?: number): void {
+  setState(state: state, _av?: number, _skipPush?: boolean): void {
     if (typeof _av === 'undefined') {
         if(this.#history.length > 0 && (this.#history.length - 1) > this.#activeVersion && this.#needsReset) {
             this.#history.splice(this.#activeVersion + 1, this.#history.length)
         }
     }
-    this.#history.push(state);
+    if(!_skipPush) {
+        this.#history.push(state); 
+    }
     if (this.#history.length > this.settings.historySize!) {
         this.#history.shift();
     }
