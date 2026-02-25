@@ -19,7 +19,16 @@ import {useGlobalState} from "react-usectx";
 ```js
 // get both current state and set function
 const [myState, setMyState] = useGlobalState("stateName");
+
+
+// use with undo and redo methods
+const [myState, setMyState, undo, redo] = useGlobalState("stateName");
+
 ```
+
+Undo and redo functionality is essential for any interface that allows users to make edits. It enhances usability by giving users confidence that their changes aren’t permanent and can be easily adjusted.
+
+By implementing simple Undo and Redo actions—typically as two buttons—you allow users to navigate backward to a previous state or forward to a more recent state of the component.
 
 ## Other methods:
 
@@ -80,7 +89,7 @@ useGlobalState(myContextID, { name: "John" });
 The value you want the state to be initially. It can be a value of any type.
 
 
-### API Methods
+## API Methods
 
 ```js
 const api = stateApi(myContextID);

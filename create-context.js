@@ -38,17 +38,24 @@ export class CreateContext {
             this.#trigger();
         }
     }
+    hasUndo() {
+        return this.#activeVersion > 0;
+    }
     redo() {
-        const next = this.#history[this.#activeVersion + 1];
+        const nextIndex = this.#activeVersion + 1;
+        const next = this.#history[nextIndex];
         if (next) {
-            this.setState(next, this.#history.indexOf(next));
+            this.setState(next, nextIndex);
             this.#needsReset = true;
             this.#trigger();
         }
     }
+    hasRedo() {
+        return !!this.#history[this.#activeVersion + 1];
+    }
     setState(state, _av) {
         if (typeof _av === 'undefined') {
-            if ((this.#history.length - 1) > this.#activeVersion && this.#needsReset) {
+            if (this.#history.length > 0 && (this.#history.length - 1) > this.#activeVersion && this.#needsReset) {
                 this.#history.splice(this.#activeVersion + 1, this.#history.length);
             }
         }

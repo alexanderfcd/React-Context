@@ -22,7 +22,8 @@ export function getCtx(name) {
 }
 export function useCtx(name, initialState) {
     const initializeFirst = updateCtx(name, initialState);
-    return [getCtx(name), initializeFirst];
+    const api = getInstance(name);
+    return [getCtx(name), initializeFirst, api.undo, api.redo, api];
 }
 const reducerCache = {};
 export function useReducer(name, modiFier, useCache = false) {

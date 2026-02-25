@@ -39,9 +39,10 @@ export function getCtx<Snapshot>(name: string): Snapshot {
 export function useCtx(
   name: string,
   initialState?: state
-): [ReactNode, Function] {
-  const initializeFirst = updateCtx(name, initialState)
-  return [getCtx(name), initializeFirst];
+): [ReactNode, Function, Function, Function, CreateContext] {
+  const initializeFirst = updateCtx(name, initialState);
+  const api = getInstance(name);
+  return [getCtx(name), initializeFirst, api.undo, api.redo, api];
 }
 
 const reducerCache: { [key: string]: WeakMap<any, any> } = {};
